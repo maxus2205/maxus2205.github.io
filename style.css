@@ -1,0 +1,66 @@
+#myTable {
+	border: 2px solid #48AAE6;
+	border-collapse: separate;
+}
+
+#left-func, #right-func{
+	border-spacing: 0px 2px;
+}
+
+#top-func, #bot-func{
+	border-left: 2px solid transparent;
+	border-spacing: 2px 0px;
+}
+
+#bigTable {
+	border-collapse: collapse;
+	margin: auto;
+}
+
+.first-cell {
+	width: 62px;
+}
+
+#myTable td {
+	background: #48AAE6;
+}
+
+td {
+	width: 60px;
+	height: 60px;	
+}
+
+.del {
+	background: #B20000;
+}
+
+.del:before {
+	content: "-";
+}
+
+.add:before {
+	content: "+";
+}
+
+.add {
+	background: #F3A500;
+}
+
+.add, .del{
+	cursor: pointer;
+	font-size: 200%;
+	color: white;
+	text-align: center;
+	vertical-align: middle;
+	width: 60px;
+	height: 60px;
+}
+
+.add:hover, .del:hover {
+	opacity: 0.5;
+	transition: 1s;
+}
+
+.add:not(:hover), .del:not(:hover) {
+  transition: 1s;
+}
