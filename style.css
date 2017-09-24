@@ -55,10 +55,12 @@ td {
 .button:hover {
 	opacity: 0.5;
 	transition: 1s;
+	//transition-property: opacity;
 }
 
 .button:not(:hover) {
 	transition: 1s;
+	//transition-property: opacity;
 }
 
 .button--darkorange {
