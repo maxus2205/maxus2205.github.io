@@ -30,6 +30,7 @@ mainTable.onmouseover = function(event) {
 	delColBut.style.left = 3 + 51*myColumn + "px";
 	delRowBut.style.top = 3 + 51*myRow + "px";
 	delColBut.style.transition = "200ms";
+	delRowBut.style.transition = "200ms";
 };
 
 //Optional block to hide the row and column number (if show functions are on):
