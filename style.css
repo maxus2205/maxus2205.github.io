@@ -1,52 +1,46 @@
-#myTable {
-	border: 2px solid #48AAE6;
-	border-collapse: separate;
+body {
+	display: block; 
+	text-align:center;
 }
 
-#left-func, #right-func{
-	border-spacing: 0px 2px;
+.main-block {
+	position: relative;
+	margin: 10px auto;
+	width: 309;
+	height: 309;
+	//background: purple;
+	
 }
 
-#top-func, #bot-func{
-	border-left: 2px solid transparent;
-	border-spacing: 2px 0px;
+.table-block {
+	position: relative;
+	margin: 50px auto;
+	display: inline-block;
+	//background: lime;
 }
 
-#bigTable {
-	border-collapse: collapse;
-	margin: auto;
+.main-table {
+	//position: relative;
+	//left: 51px;
+	//top: 51px;
+    display: table;
+	border: 1px solid #48AAE6;
+	margin: 1px;
+	border-spacing: 1px;
 }
 
-.first-cell {
-	width: 62px;
-}
-
-#myTable td {
-	background: #48AAE6;
-}
-
+/*.main-table */
 td {
+	background: #48AAE6;
+	padding: 0px;
 	width: 50px;
-	height: 50px;	
+	height: 50px;
 }
 
-.del {
-	background: #B20000;
-}
-
-.del:before {
-	content: "-";
-}
-
-.add:before {
-	content: "+";
-}
-
-.add {
-	background: #F3A500;
-}
-
-.add, .del{
+.button {
+	position: absolute;    
+	border: 0;
+	outline: none; 
 	cursor: pointer;
 	font-size: 200%;
 	color: white;
@@ -54,13 +48,54 @@ td {
 	vertical-align: middle;
 	width: 50px;
 	height: 50px;
+	
+	
 }
 
-.add:hover, .del:hover {
+.button:hover {
 	opacity: 0.5;
 	transition: 1s;
 }
 
-.add:not(:hover), .del:not(:hover) {
-  transition: 1s;
+.button:not(:hover) {
+	transition: 1s;
 }
+
+.button--darkorange {
+	//content: "+";
+	background: #F3A500;
+}
+
+.button--darkred {
+	//content: "-";
+	background: #B20000;
+}
+
+.button_del-row {
+	display: none;
+	left: -50px;
+    top: 3px;
+}
+
+.button_del-col {
+	display: none;
+	left: 3px;
+    top: -50px;
+}
+
+.button_add-col {
+	left: 3px;
+    bottom: -50px;
+}
+
+.button_add-row {
+	right: -50px;
+    top: 3px;
+}
+
+/*  testing 
+.button_add-col:hover {
+	left: 140px;
+	transition: 400ms;
+}
+*/
