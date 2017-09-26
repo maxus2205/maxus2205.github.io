@@ -3,6 +3,14 @@ body {
 	text-align:center;
 }
 
+.main-block {
+	position: relative;
+	margin: 10px auto;
+	width: 309;
+	height: 309;
+	//background: purple;
+	
+}
 
 .table-block {
 	position: relative;
@@ -47,10 +55,12 @@ td {
 .button:hover {
 	opacity: 0.5;
 	transition: 1s;
+	//transition-property: opacity;
 }
 
 .button:not(:hover) {
 	transition: 1s;
+	//transition-property: opacity;
 }
 
 .button--darkorange {
