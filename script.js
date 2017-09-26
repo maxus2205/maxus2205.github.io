@@ -45,7 +45,6 @@ mainTable.onmouseout = function(event) {
 	var target = event.target;
 	target.style.background = '';
 	target.innerHTML = "";
-	//delColBut.style.left += "";
 };
 
 //Changing the transition duration
