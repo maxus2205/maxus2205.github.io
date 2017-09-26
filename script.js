@@ -1,4 +1,4 @@
-var mainBlock = document.querySelector(".main-block");
+var tableBlock = document.querySelector(".table-block");
 var mainTable = document.querySelector(".main-table");
 var delColBut = document.querySelector('.button_del-col');
 var delRowBut = document.querySelector('.button_del-row');
@@ -14,7 +14,7 @@ function clearTable() {
 		allCells[i].innerHTML = "";
 	}
 }
-clearTable(); //clear table if its no empty  (optional)
+//clearTable(); //clear table if its no empty  (optional)
 
 
 //initialization buttons
@@ -37,7 +37,7 @@ mainTable.onmouseover = function(event) {
 };
 
 //Optional block to hide the row and column number (if show functions are on):
-
+/*
 mainTable.onmouseout = function(event) {
 	if (!(event.target instanceof HTMLTableCellElement)) {
     return;
@@ -47,12 +47,13 @@ mainTable.onmouseout = function(event) {
 	target.innerHTML = "";
 	//delColBut.style.left += "";
 };
+*/
 
 //Changing the transition duration
 
 mainTable.onmouseenter = function() {
-	delColBut.style.transition = "300ms";
-	delRowBut.style.transition = "300ms";
+	delColBut.style.transition = "0";
+	delRowBut.style.transition = "0";
 }
 
 mainTable.onmouseleave = function() {
@@ -62,13 +63,13 @@ mainTable.onmouseleave = function() {
 
 //Display button options:
 
-mainBlock.onmouseenter = delButtonsOn;
+mainTable.onmouseenter = delButtonsOn;
 function delButtonsOn() {
 	delColBut.style.display = "inline";
 	delRowBut.style.display = "inline";
 }
 
-mainBlock.onmouseleave = delButtonsOff;
+tableBlock.onmouseleave = delButtonsOff;
 function delButtonsOff() {
 	delColBut.style.display = "";
 	delRowBut.style.display = "";
@@ -93,6 +94,7 @@ function addRowFunc() {
 function delColFunc() {
 	for (var i = 0; i < mainTable.rows.length; i++) {
 		mainTable.rows[i].deleteCell(myColumn);
+		//if (i == mainTable.rows.length) mainTable;			//
   }
 }
 
