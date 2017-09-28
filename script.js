@@ -9,20 +9,13 @@ var addRowBut = document.querySelector('.button_add-row');
 
 var myRow;
 var myColumn;
+const CELL_SIZE = 51;
+const TRANSITION_IN_TABLE = "300ms";
 
 addColBut.addEventListener("click", addColFunc);
 addRowBut.addEventListener("click", addRowFunc);
 delColBut.addEventListener("click", delColFunc);
 delRowBut.addEventListener("click", delRowFunc);
-
-function clearTable() {
-    var allCells = document.querySelectorAll("td");
-    for (i = 0; i < allCells.length; i++) {
-        allCells[i].innerHTML = "";
-    }
-}
-
-//clearTable(); //clear table if its no empty  (optional)
 
 //initialization buttons
 table.addEventListener("mouseover", showBut);
@@ -37,13 +30,12 @@ function showBut(event) {
     with(event.target || event.srcElement) {
         myRow = parentNode.rowIndex;
         myColumn = cellIndex;
-        // target.innerHTML = "row: " + myRow + ", cell: " + myColumn;
+        // target.innerHTML = myRow + "-" + myColumn;
     }
 
-    setDelButPosition();
+    setDelButPosition(CELL_SIZE);
 
-    delColBut.style.transition = "300ms";
-    delRowBut.style.transition = "300ms";
+    transitionInTabOn(TRANSITION_IN_TABLE);
 
     if (table.rows.length > 1) {
         delRowBut.style.display = "block"
@@ -62,26 +54,20 @@ function delButtonsHide() {
 }
 
 // Setting up position of delete buttons
-function setDelButPosition() {
-    delColBut.style.left = 3 + 51 * myColumn + "px";
-    delRowBut.style.top = 3 + 51 * myRow + "px";
+function setDelButPosition(cellSize) {
+    delColBut.style.left = 3 + cellSize * myColumn + "px";
+    delRowBut.style.top = 3 + cellSize * myRow + "px";
+}
+
+function transitionInTabOn(transitionTime) {
+    delColBut.style.transition = transitionTime;
+    delRowBut.style.transition = transitionTime;
 }
 
 function transitionInTabOff() {
     delColBut.style.transition = "";
     delRowBut.style.transition = "";
 }
-
-//Optional block to hide the row and column number (if show functions are on):
-/*table.onmouseout = function(event) {
-    if (!(event.target instanceof HTMLTableCellElement)) {
-        return;
-    }
-    var target = event.target;
-    target.style.background = '';
-    target.innerHTML = "";
-}*/
-
 
 // Button functions:
 function addColFunc() {
@@ -99,7 +85,6 @@ function addRowFunc() {
 }
 
 function delColFunc() {
-    // console.log("Row:" + myRow + ";Col:" + myColumn);
     for (var i = 0; i < table.rows.length; i++) {
         table.rows[i].deleteCell(myColumn);
     }
@@ -107,8 +92,38 @@ function delColFunc() {
 }
 
 function delRowFunc() {
-    // console.log("r:" + myRow);
-    // console.log("before" + table.rows.length);
     table.deleteRow(myRow);
     delButtonsHide();
+}
+
+
+// функция покраски ячеек в разный цвет для наглядности работы кнопок удаления
+
+var toggle = document.querySelector('.toggle');
+var toggleTextBg = document.querySelector('.toggle-text-bg');
+var startPosition = true;
+
+toggle.addEventListener("click", moveToggleTextBg);
+
+function moveToggleTextBg() {
+    let td = document.querySelectorAll("td");
+    if (startPosition) {
+        toggleTextBg.style.left = "73";
+        toggleTextBg.style.width = "71px";
+        startPosition = false;
+        for (i = 0; i < td.length; i++) {
+            td[i].style.background = generateColor();
+        }
+    } else {
+        toggleTextBg.style.left = "";
+        toggleTextBg.style.width = "";
+        startPosition = true;
+        for (i = 0; i < td.length; i++) {
+            td[i].style.background = "";
+        }
+    }
+}
+
+function generateColor() {
+    return '#' + Math.floor(Math.random() * 16777215).toString(16)
 }

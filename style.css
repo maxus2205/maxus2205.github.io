@@ -6,27 +6,17 @@ body {
 
 .table-block {
     position: relative;
+    top: 30px;
     margin: 50px auto;
-    display: inline-block; //background: lime;
+    display: inline-block;
 }
 
 .table {
-    //position: relative;
-    //left: 51px;
-    //top: 51px;
     display: table;
     border: 1px solid #48AAE6;
     margin: 1px;
     border-spacing: 1px;
 }
-
-
-
-
-
-
-
-/*.table */
 
 td {
     background: #48AAE6;
@@ -50,20 +40,18 @@ td {
 
 .button:hover {
     opacity: 0.5;
-    transition: opacity 1s; //transition-property: opacity;
+    transition: opacity 1s;
 }
 
 .button:not(:hover) {
-    transition: 1s; //transition-property: opacity;
+    transition: 1s;
 }
 
 .button--darkorange {
-    //content: "+";
     background: #F3A500;
 }
 
 .button--darkred {
-    //content: "-";
     background: #B20000;
 }
 
@@ -98,9 +86,55 @@ td {
 
 
 
-/*  testing 
-.button_add-col:hover {
-	left: 140px;
-	transition: 400ms;
+
+
+/*стиль кнопки покраски ячеек в рандомный цвет*/
+
+.toggle {
+
+    position: absolute;
+    left: 20%;
+    top: 5px;
+    width: 145px;
+    height: 20px;
+    background: grey;
+    border-radius: 20px;
+    z-index: 2;
 }
-*/
+
+.toggle-buttons {
+    display: block;
+    position: absolute;
+    width: 73px;
+    height: 20px;
+    font-size: 70%;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    outline: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.toggle_default {
+    left: 0px;
+    z-index: 3;
+}
+
+.toggle_colored {
+    right: 0px;
+    z-index: 4;
+}
+
+.toggle-text-bg {
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    height: 18px;
+    width: 71px;
+    background: lightgreen;
+    z-index: 1;
+    border-radius: 20px;
+    transition: 200ms;
+}
