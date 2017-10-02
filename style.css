@@ -3,19 +3,23 @@ body {
     text-align: center;
 }
 
+.my-block {
+    display: inline-block;
+    padding: 50px;
+    /*border: 1px solid lime;*/
+}
+
 
 .table-block {
     position: relative;
-    top: 30px;
-    margin: 50px auto;
     display: inline-block;
+    /*border: 1px solid purple;*/
 }
 
 .table {
-    display: table;
     border: 1px solid #48AAE6;
-    margin: 1px;
-    border-spacing: 1px;
+    margin: 2px;
+    border-spacing: 2px;
 }
 
 td {
@@ -58,30 +62,31 @@ td {
 .button_del-row {
     display: none;
     left: -50px;
-    top: 3px;
+    /*top: 0px;*/
+    /*не нужен с margin-top*/
+    margin-top: 5px;
 }
 
 .button_del-col {
     display: none;
-    left: 3px;
+    /*left: 0px;*/
+    /*не нужен с margin-left*/
     top: -50px;
+    margin-left: 5px;
 }
 
 .button_add-col {
-    left: 3px;
+    left: 0px;
     bottom: -50px;
+    margin-left: 5px;
 }
 
 .button_add-row {
     right: -50px;
-    top: 3px;
+    /*top: 0px;*/
+    /*не нужен с margin-top*/
+    margin-top: 5px;
 }
-
-
-
-
-
-
 
 
 
@@ -91,9 +96,9 @@ td {
 /*стиль кнопки покраски ячеек в рандомный цвет*/
 
 .toggle {
-
-    position: absolute;
-    left: 20%;
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
     top: 5px;
     width: 145px;
     height: 20px;

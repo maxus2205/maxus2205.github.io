@@ -55,8 +55,8 @@ function delButtonsHide() {
 
 // Setting up position of delete buttons
 function setDelButPosition(cellSize) {
-    delColBut.style.left = 3 + cellSize * myColumn + "px";
-    delRowBut.style.top = 3 + cellSize * myRow + "px";
+    delColBut.style.left = cellSize * myColumn + "px";
+    delRowBut.style.top = cellSize * myRow + "px";
 }
 
 function transitionInTabOn(transitionTime) {
@@ -74,17 +74,20 @@ function addColFunc() {
     var row = document.createElement("tr");
     table.appendChild(row);
     for (var i = 0; i < table.rows[0].cells.length; i++) {
-        row.insertCell(i);
+        let cell = row.insertCell(i);
+        bgColorReturn(cell, startPosition); //colorize new cells
     }
 }
 
 function addRowFunc() {
     for (var i = 0; i < table.rows.length; i++) {
-        table.rows[i].insertCell(-1);
+        let cell = table.rows[i].insertCell(-1);
+        bgColorReturn(cell, startPosition); //colorize new cells
     }
 }
 
 function delColFunc() {
+
     for (var i = 0; i < table.rows.length; i++) {
         table.rows[i].deleteCell(myColumn);
     }
@@ -126,4 +129,14 @@ function moveToggleTextBg() {
 
 function generateColor() {
     return '#' + Math.floor(Math.random() * 16777215).toString(16)
+}
+
+function bgColorReturn(myCell, toggleStartPosition) {
+    let color;
+    if (toggleStartPosition) {
+        myCell.style.background = "";
+    } else {
+        myCell.style.background = generateColor();
+    }
+    return myCell;
 }
