@@ -1,34 +1,35 @@
-var tableBlock = document.querySelector('.table-block');
-var table = document.querySelector('.table');
+var container = document.querySelector('.container');
+var table = document.querySelector('.container__table');
+console.log(table);
 
-
-var delColBut = document.querySelector('.button_del-col');
-var delRowBut = document.querySelector('.button_del-row');
-var addColBut = document.querySelector('.button_add-col');
-var addRowBut = document.querySelector('.button_add-row');
+var delColButton = document.querySelector('.button_del-col');
+var delRowButton = document.querySelector('.button_del-row');
+var addColButton = document.querySelector('.button_add-col');
+var addRowButton = document.querySelector('.button_add-row');
 
 var myRow;
 var myColumn;
 
-addColBut.addEventListener("click", addColFunc);
-addRowBut.addEventListener("click", addRowFunc);
-delColBut.addEventListener("click", delColFunc);
-delRowBut.addEventListener("click", delRowFunc);
+addColButton.addEventListener("click", addColFunc);
+addRowButton.addEventListener("click", addRowFunc);
+delColButton.addEventListener("click", delColFunc);
+delRowButton.addEventListener("click", delRowFunc);
 
-function clearTable() {
+/*function clearTable() {
     var allCells = document.querySelectorAll("td");
     for (i = 0; i < allCells.length; i++) {
         allCells[i].innerHTML = "";
     }
-}
+}*/
 
 //clearTable(); //clear table if its no empty  (optional)
 
 //initialization buttons
-table.addEventListener("mouseover", showBut);
-tableBlock.addEventListener("mouseleave", delButtonsHide);
+console.log(table);
+/*table.addEventListener("mouseover", showButton);
+container.addEventListener("mouseleave", delButtonsHide);*/
 
-function showBut(event) {
+function showButton(event) {
     if (!(event.target instanceof HTMLTableCellElement)) {
         return;
     }
@@ -40,16 +41,16 @@ function showBut(event) {
         // target.innerHTML = "row: " + myRow + ", cell: " + myColumn;
     }
 
-    setDelButPosition();
+    setDelButtonPosition();
 
-    delColBut.style.transition = "300ms";
-    delRowBut.style.transition = "300ms";
+    delColButton.style.transition = "300ms";
+    delRowButton.style.transition = "300ms";
 
     if (table.rows.length > 1) {
-        delRowBut.style.display = "block"
+        delRowButton.style.display = "block"
     } else delButtonsHide;
     if (table.rows[0].cells.length > 1) {
-        delColBut.style.display = "block"
+        delColButton.style.display = "block"
     } else delButtonsHide;
 
     //Changing the transition duration:
@@ -57,19 +58,19 @@ function showBut(event) {
 }
 
 function delButtonsHide() {
-    delColBut.style.display = "none";
-    delRowBut.style.display = "none";
+    delColButton.style.display = "none";
+    delRowButton.style.display = "none";
 }
 
 // Setting up position of delete buttons
-function setDelButPosition() {
-    delColBut.style.left = 3 + 51 * myColumn + "px";
-    delRowBut.style.top = 3 + 51 * myRow + "px";
+function setDelButtonPosition() {
+    delColButton.style.left = 3 + 51 * myColumn + "px";
+    delRowButton.style.top = 3 + 51 * myRow + "px";
 }
 
 function transitionInTabOff() {
-    delColBut.style.transition = "";
-    delRowBut.style.transition = "";
+    delColButton.style.transition = "";
+    delRowButton.style.transition = "";
 }
 
 //Optional block to hide the row and column number (if show functions are on):
@@ -86,7 +87,7 @@ function transitionInTabOff() {
 // Button functions:
 function addColFunc() {
     var row = document.createElement("tr");
-    table.appendChild(row);
+    this.appendChild(row);
     for (var i = 0; i < table.rows[0].cells.length; i++) {
         row.insertCell(i);
     }
@@ -94,14 +95,14 @@ function addColFunc() {
 
 function addRowFunc() {
     for (var i = 0; i < table.rows.length; i++) {
-        table.rows[i].insertCell(-1);
+        this.rows[i].insertCell(-1);
     }
 }
 
 function delColFunc() {
     // console.log("Row:" + myRow + ";Col:" + myColumn);
     for (var i = 0; i < table.rows.length; i++) {
-        table.rows[i].deleteCell(myColumn);
+        this.rows[i].deleteCell(myColumn);
     }
     delButtonsHide();
 }
@@ -109,6 +110,6 @@ function delColFunc() {
 function delRowFunc() {
     // console.log("r:" + myRow);
     // console.log("before" + table.rows.length);
-    table.deleteRow(myRow);
+    this.deleteRow(myRow);
     delButtonsHide();
 }

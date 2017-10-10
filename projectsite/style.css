@@ -4,7 +4,7 @@ body {
 }
 
 
-.table-block {
+.container {
     position: relative;
     margin: 50px auto;
     display: inline-block; //background: lime;
@@ -19,6 +19,7 @@ body {
     margin: 1px;
     border-spacing: 1px;
 }
+
 
 
 
@@ -98,9 +99,10 @@ td {
 
 
 
+
 /*  testing 
 .button_add-col:hover {
-	left: 140px;
-	transition: 400ms;
+    left: 140px;
+    transition: 400ms;
 }
 */
