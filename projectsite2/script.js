@@ -1,27 +1,43 @@
-var tableBlock = document.querySelector('.container');
-var table = document.querySelector('.container__table');
-console.log(table);
+var container = document.querySelector('.container');
+var table = document.querySelector('.table');
 
-var delColBut = document.querySelector('.container__button_del-col');
-var delRowBut = document.querySelector('.container__button_del-row');
-var addColBut = document.querySelector('.container__button_add-col');
-var addRowBut = document.querySelector('.container__button_add-row');
+
+
+var delColButton = document.querySelector('.button_del-col');
+var delRowButton = document.querySelector('.button_del-row');
+var addColButton = document.querySelector('.button_add-col');
+var addRowButton = document.querySelector('.button_add-row');
 
 var myRow;
 var myColumn;
-const CELL_SIZE = 51;
-const TRANSITION_IN_TABLE = "300ms";
 
-addColBut.addEventListener("click", addColFunc);
-addRowBut.addEventListener("click", addRowFunc);
-delColBut.addEventListener("click", delColFunc);
-delRowBut.addEventListener("click", delRowFunc);
+/*var TableProto = {
+    constructor: function(index, name) {
+        this.index = index;
+        this.name = name;
+        this.table = document.querySelectorAll('.table')[this.index];
+        this.container = document.querySelectorAll('.container')[this.index];
+        this.addColButton = document.querySelectorAll('.button_add-col')[this.index];
+        this.addRowButton = document.querySelectorAll('.button_add-row')[this.index];
+        this.delColButton = document.querySelectorAll('.button_del-col')[this.index];
+        this.delRowButton = document.querySelectorAll('.button_del-row')[this.index];
+    }
+}
+
+var tableOne = Object.create(TableProto).constructor(0, "first");
+var tableTwo = Object.create(TableProto).constructor(1, "second");
+console.log(tableTwo.name);*/
 
 //initialization buttons
-table.addEventListener("mouseover", showBut);
-tableBlock.addEventListener("mouseleave", delButtonsHide);
+addColButton.addEventListener("click", addColFunc);
+addRowButton.addEventListener("click", addRowFunc);
+delColButton.addEventListener("click", delColFunc);
+delRowButton.addEventListener("click", delRowFunc);
 
-function showBut(event) {
+table.addEventListener("mouseover", showButtons);
+container.addEventListener("mouseleave", delButtonsHide);
+
+function showButtons(event) {
     if (!(event.target instanceof HTMLTableCellElement)) {
         return;
     }
@@ -33,50 +49,54 @@ function showBut(event) {
         // target.innerHTML = myRow + "-" + myColumn;
     }
 
-    setDelButPosition(CELL_SIZE);
+    if (this.tagName = "TABLE" || this == table) console.log("this.tagName " + this.tagName, " this: " + this);
 
-    transitionInTabOn(TRANSITION_IN_TABLE);
+    locateDelButtons(this);
+    delButtonsShow(this);
 
-    if (table.rows.length > 1) {
-        delRowBut.style.display = "block"
+
+
+    /*if (this.rows.length > 1) {
+        delRowButton.style.display = "block"
     } else delButtonsHide;
-    if (table.rows[0].cells.length > 1) {
-        delColBut.style.display = "block"
-    } else delButtonsHide;
+    if (this.rows[0].cells.length > 1) {
+        delColButton.style.display = "block"
+    } else delButtonsHide;*/
+}
 
-    //Changing the transition duration:
-    table.addEventListener("mouseleave", transitionInTabOff);
+function delButtonsShow(tab) {
+    if (tab.rows.length > 1) {
+        delRowButton.style.display = "block"
+    } else delButtonsHide;
+    if (tab.rows[0].cells.length > 1) {
+        delColButton.style.display = "block"
+    } else delButtonsHide;
 }
 
 function delButtonsHide() {
-    delColBut.style.display = "none";
-    delRowBut.style.display = "none";
+    delColButton.style.display = "none";
+    delRowButton.style.display = "none";
 }
 
 // Setting up position of delete buttons
-function setDelButPosition(cellSize) {
-    delColBut.style.left = cellSize * myColumn + "px";
-    delRowBut.style.top = cellSize * myRow + "px";
-}
-
-function transitionInTabOn(transitionTime) {
-    delColBut.style.transition = transitionTime;
-    delRowBut.style.transition = transitionTime;
-}
-
-function transitionInTabOff() {
-    delColBut.style.transition = "";
-    delRowBut.style.transition = "";
+function locateDelButtons(tab) {
+    let cellSize = parseInt(getComputedStyle(tab.rows[0].cells[0]).width, 10);
+    let borderSpacing = parseInt(getComputedStyle(tab).borderSpacing, 10);
+    let cellStep = cellSize + borderSpacing;
+    // console.log(borderSpacing);
+    delColButton.style.left = (cellSize + borderSpacing) * myColumn + "px";
+    delRowButton.style.top = (cellSize + borderSpacing) * myRow + "px";
 }
 
 // Button functions:
 function addColFunc() {
-    var row = document.createElement("tr");
+    let row = document.createElement("tr");
     table.appendChild(row);
     for (var i = 0; i < table.rows[0].cells.length; i++) {
         let cell = row.insertCell(i);
         bgColorReturn(cell, startPosition); //colorize new cells
     }
+    return table;
 }
 
 function addRowFunc() {
@@ -84,6 +104,7 @@ function addRowFunc() {
         let cell = table.rows[i].insertCell(-1);
         bgColorReturn(cell, startPosition); //colorize new cells
     }
+    return table;
 }
 
 function delColFunc() {
@@ -92,12 +113,16 @@ function delColFunc() {
         table.rows[i].deleteCell(myColumn);
     }
     delButtonsHide();
+    // return tab;
 }
 
 function delRowFunc() {
     table.deleteRow(myRow);
     delButtonsHide();
+    // return tab;
 }
+
+
 
 
 // функция покраски ячеек в разный цвет для наглядности работы кнопок удаления
@@ -113,6 +138,7 @@ function moveToggleTextBg() {
     if (startPosition) {
         toggleTextBg.style.left = "73";
         toggleTextBg.style.width = "71px";
+        toggleTextBg.style.backgroundImage = "linear-gradient(#ff0000, #0000ff, #00ff00)";
         startPosition = false;
         for (i = 0; i < td.length; i++) {
             td[i].style.background = generateColor();
@@ -120,6 +146,7 @@ function moveToggleTextBg() {
     } else {
         toggleTextBg.style.left = "";
         toggleTextBg.style.width = "";
+        toggleTextBg.style.backgroundImage = "";
         startPosition = true;
         for (i = 0; i < td.length; i++) {
             td[i].style.background = "";

@@ -7,22 +7,63 @@
 </head>
 
 <body>
-    <div class="toggle">
-        <input class="toggle-buttons toggle_default" type="button" value="default cells" placeholder="fsdfs" />
-        <input class="toggle-buttons toggle_colored" type="button" value="colored cells" />
-        <div class="toggle-text-bg"></div>
+    <div class="header">
+        <!-- margin-bottom: 5px; -->
+        <div class="toggle">
+            <button class="toggle-buttons toggle_default" name="button">default cells</button>
+            <button class="toggle-buttons toggle_colored" name="button">colored cells</button>
+            <div class="toggle-text-bg"></div>
+        </div>
     </div>
     <div class="wrapper">
         <div class="container">
-            <input class="container__button container__button_del-col container__button--darkred" type="button" value="-" />
+            <button class="button button_del-col button--darkred" name="button">-</button>
             <!-- onclick="delColFunc();" -->
-            <input class="container__button container__button_del-row container__button--darkred" type="button" value="-" />
+            <button class="button button_del-row button--darkred" name="button">-</button>
             <!-- onclick="delRowFunc();" -->
-            <input class="container__button container__button_add-col container__button--darkorange" type="button" value="+" />
+            <button class="button button_add-col button--darkorange" name="button">+</button>
             <!-- onclick="addColFunc();" -->
-            <input class="container__button container__button_add-row container__button--darkorange" type="button" value="+" />
+            <button class="button button_add-row button--darkorange" name="button">+</button>
             <!-- onclick="addRowFunc();" -->
-            <table class="container__table">
+            <table class="table">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="container">
+            <button class="button button_del-col button--darkred" name="button">-</button>
+            <!-- onclick="delColFunc();" -->
+            <button class="button button_del-row button--darkred" name="button">-</button>
+            <!-- onclick="delRowFunc();" -->
+            <button class="button button_add-col button--darkorange" name="button">+</button>
+            <!-- onclick="addColFunc();" -->
+            <button class="button button_add-row button--darkorange" name="button">+</button>
+            <!-- onclick="addRowFunc();" -->
+            <table class="table">
                 <tr>
                     <td></td>
                     <td></td>
