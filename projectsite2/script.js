@@ -13,13 +13,13 @@ var addRowButton = document.querySelector('.container__button-add-row');
 var delColButton = document.querySelector('.container__button-del-col');
 var delRowButton = document.querySelector('.container__button-del-row');
 
-var myRow;
-var myColumn;
-
 addColButton.addEventListener("click", addColFunc);
 addRowButton.addEventListener("click", addRowFunc);
 delColButton.addEventListener("click", delColFunc);
 delRowButton.addEventListener("click", delRowFunc);
+
+var myRow;
+var myColumn;
 
 function tableEdit(e) {
     var e = e || event;
@@ -27,13 +27,9 @@ function tableEdit(e) {
     if (!(target instanceof HTMLTableCellElement)) {
         return;
     }
-    /*console.log(target.parentNode.parentNode.parentNode, this);
-    console.log(typeof target.parentNode);*/
 
     myRow = target.parentNode.rowIndex;
     myColumn = target.cellIndex;
-
-    // if (this.tagName = "TABLE" || this == table) console.log("this.tagName " + this.tagName, " this: " + this);
 
     locateDelButtons(this);
     delButtonsShow(this);
@@ -44,7 +40,6 @@ function locateDelButtons(tab) {
     let cellSize = parseInt(getComputedStyle(tab.rows[0].cells[0]).width, 10);
     let borderSpacing = parseInt(getComputedStyle(tab).borderSpacing, 10);
     let cellStep = cellSize + borderSpacing;
-    // console.log(borderSpacing);
     delColButton.style.left = (cellSize + borderSpacing) * myColumn + "px";
     delRowButton.style.top = (cellSize + borderSpacing) * myRow + "px";
 }
@@ -53,11 +48,9 @@ function delButtonsShow(tab) {
     if (tab.rows.length > 1) {
         delRowButton.style.display = "block"
     }
-    // else delButtonsHide;
     if (tab.rows[0].cells.length > 1) {
         delColButton.style.display = "block"
     }
-    // else delButtonsHide;
 }
 
 function delButtonsHide() {
