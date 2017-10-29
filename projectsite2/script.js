@@ -23,7 +23,7 @@ delRowButton.addEventListener("click", delRowFunc);
 
 function tableEdit(e) {
     var e = e || event;
-    var target = e.target;
+    let target = e.target;
     if (!(target instanceof HTMLTableCellElement)) {
         return;
     }
@@ -71,14 +71,14 @@ function delButtonsHide() {
 function addColFunc() {
     let row = document.createElement("tr");
     tables[0].appendChild(row);
-    for (var i = 0; i < tables[0].rows[0].cells.length; i++) {
+    for (i = 0; i < tables[0].rows[0].cells.length; i++) {
         let cell = row.insertCell(i);
         bgColorReturn(cell, startPosition); //colorize new cells
     }
 }
 
 function addRowFunc() {
-    for (var i = 0; i < tables[0].rows.length; i++) {
+    for (i = 0; i < tables[0].rows.length; i++) {
         let cell = tables[0].rows[i].insertCell(-1);
         bgColorReturn(cell, startPosition); //colorize new cells
     }
@@ -86,7 +86,7 @@ function addRowFunc() {
 
 function delColFunc() {
 
-    for (var i = 0; i < tables[0].rows.length; i++) {
+    for (i = 0; i < tables[0].rows.length; i++) {
         tables[0].rows[i].deleteCell(myColumn);
     }
     delButtonsHide();
