@@ -1,81 +1,42 @@
-var container = document.querySelector('.container');
-var table = document.querySelector('.table');
+var tables = document.querySelectorAll('.container__table');
+var containers = document.querySelectorAll('.container');
 
+tables.forEach(function(elem, i) {
+    elem.addEventListener("mouseover", tableEdit);
+});
+containers.forEach(function(elem, i) {
+    elem.addEventListener("mouseleave", delButtonsHide);
+});
 
-
-var delColButton = document.querySelector('.button_del-col');
-var delRowButton = document.querySelector('.button_del-row');
-var addColButton = document.querySelector('.button_add-col');
-var addRowButton = document.querySelector('.button_add-row');
+var addColButton = document.querySelector('.container__button-add-col');
+var addRowButton = document.querySelector('.container__button-add-row');
+var delColButton = document.querySelector('.container__button-del-col');
+var delRowButton = document.querySelector('.container__button-del-row');
 
 var myRow;
 var myColumn;
 
-/*var TableProto = {
-    constructor: function(index, name) {
-        this.index = index;
-        this.name = name;
-        this.table = document.querySelectorAll('.table')[this.index];
-        this.container = document.querySelectorAll('.container')[this.index];
-        this.addColButton = document.querySelectorAll('.button_add-col')[this.index];
-        this.addRowButton = document.querySelectorAll('.button_add-row')[this.index];
-        this.delColButton = document.querySelectorAll('.button_del-col')[this.index];
-        this.delRowButton = document.querySelectorAll('.button_del-row')[this.index];
-    }
-}
-
-var tableOne = Object.create(TableProto).constructor(0, "first");
-var tableTwo = Object.create(TableProto).constructor(1, "second");
-console.log(tableTwo.name);*/
-
-//initialization buttons
 addColButton.addEventListener("click", addColFunc);
 addRowButton.addEventListener("click", addRowFunc);
 delColButton.addEventListener("click", delColFunc);
 delRowButton.addEventListener("click", delRowFunc);
 
-table.addEventListener("mouseover", showButtons);
-container.addEventListener("mouseleave", delButtonsHide);
-
-function showButtons(event) {
-    if (!(event.target instanceof HTMLTableCellElement)) {
+function tableEdit(e) {
+    var e = e || event;
+    var target = e.target;
+    if (!(target instanceof HTMLTableCellElement)) {
         return;
     }
-    var target = event.target;
-    //target.style.background = 'pink';
-    with(event.target || event.srcElement) {
-        myRow = parentNode.rowIndex;
-        myColumn = cellIndex;
-        // target.innerHTML = myRow + "-" + myColumn;
-    }
+    /*console.log(target.parentNode.parentNode.parentNode, this);
+    console.log(typeof target.parentNode);*/
 
-    if (this.tagName = "TABLE" || this == table) console.log("this.tagName " + this.tagName, " this: " + this);
+    myRow = target.parentNode.rowIndex;
+    myColumn = target.cellIndex;
+
+    // if (this.tagName = "TABLE" || this == table) console.log("this.tagName " + this.tagName, " this: " + this);
 
     locateDelButtons(this);
     delButtonsShow(this);
-
-
-
-    /*if (this.rows.length > 1) {
-        delRowButton.style.display = "block"
-    } else delButtonsHide;
-    if (this.rows[0].cells.length > 1) {
-        delColButton.style.display = "block"
-    } else delButtonsHide;*/
-}
-
-function delButtonsShow(tab) {
-    if (tab.rows.length > 1) {
-        delRowButton.style.display = "block"
-    } else delButtonsHide;
-    if (tab.rows[0].cells.length > 1) {
-        delColButton.style.display = "block"
-    } else delButtonsHide;
-}
-
-function delButtonsHide() {
-    delColButton.style.display = "none";
-    delRowButton.style.display = "none";
 }
 
 // Setting up position of delete buttons
@@ -88,38 +49,52 @@ function locateDelButtons(tab) {
     delRowButton.style.top = (cellSize + borderSpacing) * myRow + "px";
 }
 
+function delButtonsShow(tab) {
+    if (tab.rows.length > 1) {
+        delRowButton.style.display = "block"
+    }
+    // else delButtonsHide;
+    if (tab.rows[0].cells.length > 1) {
+        delColButton.style.display = "block"
+    }
+    // else delButtonsHide;
+}
+
+function delButtonsHide() {
+    delColButton.style.display = "none";
+    delRowButton.style.display = "none";
+}
+
+
+
 // Button functions:
 function addColFunc() {
     let row = document.createElement("tr");
-    table.appendChild(row);
-    for (var i = 0; i < table.rows[0].cells.length; i++) {
+    tables[0].appendChild(row);
+    for (var i = 0; i < tables[0].rows[0].cells.length; i++) {
         let cell = row.insertCell(i);
         bgColorReturn(cell, startPosition); //colorize new cells
     }
-    return table;
 }
 
 function addRowFunc() {
-    for (var i = 0; i < table.rows.length; i++) {
-        let cell = table.rows[i].insertCell(-1);
+    for (var i = 0; i < tables[0].rows.length; i++) {
+        let cell = tables[0].rows[i].insertCell(-1);
         bgColorReturn(cell, startPosition); //colorize new cells
     }
-    return table;
 }
 
 function delColFunc() {
 
-    for (var i = 0; i < table.rows.length; i++) {
-        table.rows[i].deleteCell(myColumn);
+    for (var i = 0; i < tables[0].rows.length; i++) {
+        tables[0].rows[i].deleteCell(myColumn);
     }
     delButtonsHide();
-    // return tab;
 }
 
 function delRowFunc() {
-    table.deleteRow(myRow);
+    tables[0].deleteRow(myRow);
     delButtonsHide();
-    // return tab;
 }
 
 
