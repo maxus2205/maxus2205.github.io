@@ -1,10 +1,10 @@
 menu.onclick = function myFunction() {
-	var x = document.getElementById("myTopnav");
+	var x = document.getElementById("menu");
 
-	if(x.className === "topnav") {
+	if(x.className === "nav_menu") {
 		x.className += " responsive";
 	}
 	else{
-		x.className = "topnav";
+		x.className = "nav_menu";
 	}
 }
